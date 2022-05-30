@@ -36,6 +36,7 @@ def to_lower(text):
     return text.lower()
 
 @st.cache
+sentiment_pipeline = pipeline("sentiment-analysis")
 def sentiment_pipeline():
     sentiment_pipeline = pipeline("sentiment-analysis")
     return sentiment_pipeline
@@ -57,7 +58,6 @@ st.write("""
 # Text Review App
 In this data app - the user upload a csv and the app display the reviews where the content doesn’t match ratings""")
 
-st.sidebar.header('User Input Features')
 
 # Collects user input features into dataframe
 uploaded_file = st.file_uploader("Upload your input CSV file", type=["csv"])
@@ -89,6 +89,6 @@ if uploaded_file is not None:
        "text/csv",
        key='download-csv')
 else:
-    st.write("Please upload the CSV File with columns name as ['ID','Text','Star','User Name', 'Thumbs Up','Review URL','Developer Reply', 'Version', 'Review Date', 'App ID']")
+    st.write("Please upload the CSV File with columns name as ['ID', 'Text', 'Star', 'User Name', 'Thumbs Up', 'Review URL', 'Developer Reply', 'Version', 'Review Date', 'App ID']")
 st.subheader('Published By Lavkush Gupta')
 
