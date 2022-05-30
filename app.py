@@ -36,7 +36,7 @@ def to_lower(text):
     return text.lower()
 
 @st.cache
-def sentiment_pipeline() -> Pipeline:
+def sentiment_pipeline():
     sentiment_pipeline = pipeline("sentiment-analysis")
     return sentiment_pipeline
 
@@ -91,3 +91,4 @@ if uploaded_file is not None:
 else:
     st.write("Please upload the CSV File with columns name as ['ID','Text','Star','User Name', 'Thumbs Up','Review URL','Developer Reply', 'Version', 'Review Date', 'App ID']")
 st.subheader('Published By Lavkush Gupta')
+
