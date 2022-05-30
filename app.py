@@ -55,9 +55,9 @@ if uploaded_file is not None:
     #input_df = pd.read_csv(uploaded_file)
     chrome_reviews = pd.read_csv(uploaded_file)
     chrome_reviews = chrome_reviews.loc[:, ['ID','Text','Star','User Name', 'Thumbs Up','Review URL','Developer Reply', 'Version', 'Review Date', 'App ID']]
-    st.write(First 3 Rows of Dataframe)
+    st.write('First 3 Rows of Dataframe')
     st.write(chrome_reviews.head(3))
-    st.write(Please Wait for final Result.)
+    st.write('Please Wait for final Result.')
     #Cleaning Text of Emojis, Speacial Characters
     chrome_reviews['Text'].dropna()
     chrome_reviews['Tokenised_Text'] = chrome_reviews['Text'].apply(convert_emojis)
