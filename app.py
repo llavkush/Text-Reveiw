@@ -42,7 +42,6 @@ def sentiment_pipeline():
     return sentiment_pipeline
 
 #Helppr Function to get sentiments
-@st.cache
 def get_sentiments(text):
   sentiments = sentiment_pipeline(text)
   return sentiments[0]['label']
