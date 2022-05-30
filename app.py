@@ -71,6 +71,5 @@ if uploaded_file is not None:
     chrome_reviews[['Text','user_sentiments','Star','Tokenised_Text']]
     st.write(chrome_reviews[['Text','user_sentiments','Star','Tokenised_Text']])
 else:
-    st.write("Please upload the CSV File with colunmns
-             ['ID','Text','Star','User Name', 'Thumbs Up','Review URL','Developer Reply', 'Version', 'Review Date', 'App ID']")
+    st.write("Please upload the CSV File with columns name as ['ID','Text','Star','User Name', 'Thumbs Up','Review URL','Developer Reply', 'Version', 'Review Date', 'App ID']")
 st.subheader('Published By Lavkush Gupta')
