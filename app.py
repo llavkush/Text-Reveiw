@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import transformers
 from transformers import pipeline
-import re
+import regex as re
 from emot.emo_unicode import UNICODE_EMOJI # For emojis
 from emot.emo_unicode import EMOTICONS_EMO # For EMOTICONS
 
