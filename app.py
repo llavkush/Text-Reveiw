@@ -35,12 +35,22 @@ def is_special(text):
 def to_lower(text):
     return text.lower()
 
-sentiment_pipeline = pipeline("sentiment-analysis")
+@st.cache
+def sentiment_pipeline() -> Pipeline:
+    sentiment_pipeline = pipeline("sentiment-analysis")
+    return sentiment_pipeline
 
 #Helppr Function to get sentiments
+@st.cache
 def get_sentiments(text):
   sentiments = sentiment_pipeline(text)
   return sentiments[0]['label']
+
+
+#Dowload CSV
+@st.cache
+def convert_df(df):
+   return df.to_csv().encode('utf-8')
 
 
 st.write("""
@@ -70,6 +80,14 @@ if uploaded_file is not None:
     st.subheader('Output')
     chrome_reviews[['Text','user_sentiments','Star','Tokenised_Text']]
     st.write(chrome_reviews[['Text','user_sentiments','Star','Tokenised_Text']])
+    chrome_reviews = convert_df(chrome_reviews)
+
+    st.download_button(
+       "Press to Download",
+       chrome_reviews,
+       "file.csv",
+       "text/csv",
+       key='download-csv')
 else:
     st.write("Please upload the CSV File with columns name as ['ID','Text','Star','User Name', 'Thumbs Up','Review URL','Developer Reply', 'Version', 'Review Date', 'App ID']")
 st.subheader('Published By Lavkush Gupta')
