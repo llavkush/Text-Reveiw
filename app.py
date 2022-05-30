@@ -53,8 +53,21 @@ st.sidebar.header('User Input Features')
 uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
 if uploaded_file is not None:
     input_df = pd.read_csv(uploaded_file)
+    chrome_reviews = pd.read_csv(uploaded_file)
+#Cleaning Text of Emojis, Speacial Characters
+    chrome_reviews['Text'].dropna()
+    chrome_reviews['Tokenised_Text'] = chrome_reviews['Text'].apply(convert_emojis)
+    chrome_reviews['Tokenised_Text'] = chrome_reviews['Text'].apply(clean)
+    chrome_reviews['Tokenised_Text'] = chrome_reviews['Tokenised_Text'].apply(is_special)
+    chrome_reviews['Tokenised_Text'] = chrome_reviews['Tokenised_Text'].apply(to_lower)
+    chrome_reviews['user_sentiments'] = chrome_reviews['Tokenised_Text'].apply(get_sentiments)
+    chrome_reviews = chrome_reviews[chrome_reviews.user_sentiments == 'POSITIVE']
+    chrome_reviews = chrome_reviews[chrome_reviews_positive.Star < 3]
+    st.subheader('Output')
+    chrome_reviews[['Text','user_sentiments','Star','Tokenised_Text']]
+    st.write(chrome_reviews[['Text','user_sentiments','Star','Tokenised_Text']])
 else:
-    st.write("Please upload the file in CSV format")
+    st.write("Please upload the CSV File")
 #     def user_input_features():
 #         pregnancies = st.sidebar.slider('No of Pregnancies',0,20,2)
 #         #sex = st.sidebar.selectbox('Sex',('male','female'))
@@ -77,21 +90,21 @@ else:
 #         features = pd.DataFrame(data, index=[0])
 #         return features
 #     input_df = user_input_features()
-chrome_reviews = pd.read_csv(uploaded_file)
-#Cleaning Text of Emojis, Speacial Characters
-chrome_reviews['Text'].dropna()
-chrome_reviews['Tokenised_Text'] = chrome_reviews['Text'].apply(convert_emojis)
-chrome_reviews['Tokenised_Text'] = chrome_reviews['Text'].apply(clean)
-chrome_reviews['Tokenised_Text'] = chrome_reviews['Tokenised_Text'].apply(is_special)
-chrome_reviews['Tokenised_Text'] = chrome_reviews['Tokenised_Text'].apply(to_lower)
-chrome_reviews['user_sentiments'] = chrome_reviews['Tokenised_Text'].apply(get_sentiments)
+# chrome_reviews = pd.read_csv(uploaded_file)
+# #Cleaning Text of Emojis, Speacial Characters
+# chrome_reviews['Text'].dropna()
+# chrome_reviews['Tokenised_Text'] = chrome_reviews['Text'].apply(convert_emojis)
+# chrome_reviews['Tokenised_Text'] = chrome_reviews['Text'].apply(clean)
+# chrome_reviews['Tokenised_Text'] = chrome_reviews['Tokenised_Text'].apply(is_special)
+# chrome_reviews['Tokenised_Text'] = chrome_reviews['Tokenised_Text'].apply(to_lower)
+# chrome_reviews['user_sentiments'] = chrome_reviews['Tokenised_Text'].apply(get_sentiments)
 
-chrome_reviews = chrome_reviews[chrome_reviews.user_sentiments == 'POSITIVE']
-chrome_reviews = chrome_reviews[chrome_reviews_positive.Star < 3]
+# chrome_reviews = chrome_reviews[chrome_reviews.user_sentiments == 'POSITIVE']
+# chrome_reviews = chrome_reviews[chrome_reviews_positive.Star < 3]
 
-st.subheader('Output')
-chrome_reviews[['Text','user_sentiments','Star','Tokenised_Text']]
-st.write(chrome_reviews[['Text','user_sentiments','Star','Tokenised_Text']])
+# st.subheader('Output')
+# chrome_reviews[['Text','user_sentiments','Star','Tokenised_Text']]
+# st.write(chrome_reviews[['Text','user_sentiments','Star','Tokenised_Text']])
 
 
 
