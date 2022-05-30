@@ -50,11 +50,12 @@ In this data app - the user upload a csv and the app display the reviews where t
 st.sidebar.header('User Input Features')
 
 # Collects user input features into dataframe
-uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
+uploaded_file = st.file_uploader("Upload your input CSV file", type=["csv"])
 if uploaded_file is not None:
-    input_df = pd.read_csv(uploaded_file)
+    #input_df = pd.read_csv(uploaded_file)
     chrome_reviews = pd.read_csv(uploaded_file)
-#Cleaning Text of Emojis, Speacial Characters
+    st.write(chrome_reviews.head(3))
+    #Cleaning Text of Emojis, Speacial Characters
     chrome_reviews['Text'].dropna()
     chrome_reviews['Tokenised_Text'] = chrome_reviews['Text'].apply(convert_emojis)
     chrome_reviews['Tokenised_Text'] = chrome_reviews['Text'].apply(clean)
