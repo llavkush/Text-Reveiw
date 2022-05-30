@@ -35,11 +35,7 @@ def is_special(text):
 def to_lower(text):
     return text.lower()
 
-@st.cache
 sentiment_pipeline = pipeline("sentiment-analysis")
-def sentiment_pipeline():
-    sentiment_pipeline = pipeline("sentiment-analysis")
-    return sentiment_pipeline
 
 #Helppr Function to get sentiments
 def get_sentiments(text):
