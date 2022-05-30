@@ -7,6 +7,8 @@ import regex as re
 from emot.emo_unicode import UNICODE_EMOJI # For emojis
 from emot.emo_unicode import EMOTICONS_EMO # For EMOTICONS
 
+
+
 # Function for converting emojis into word
 def convert_emojis(text):
     text = str(text)
@@ -32,6 +34,8 @@ def is_special(text):
 
 def to_lower(text):
     return text.lower()
+
+sentiment_pipeline = pipeline("sentiment-analysis")
 
 #Helppr Function to get sentiments
 def get_sentiments(text):
